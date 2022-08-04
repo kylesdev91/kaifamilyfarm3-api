@@ -22,12 +22,19 @@ module.exports = async function (context, req) {
     });
 
     const mailOptions = {
-        from: "kffsande12345@outlook.com",
-        to: "kffsande12345@outlook.com",
-        subject: "From vuenodemailer " + req.body.emailSubject,
+        from: 'kffsande12345@outlook.com',
+        to: 'kffsande12345@outlook.com',
+        subject:
+          'Order From ' + req.body.emailAddress + ' - ' + req.body.emailSubject,
         text: req.body.emailBody,
-        html: '<div><table><thead><tr><th>Product ID</th><th>Name</th></tr></thead><tbody>' + req.body.emailBody + '<tr><td></td><td>$' + req.body.orderTotal + '</td></tr></tbody></table></div>',
-    }
+        html:
+          '<div><table><th><tr><th>Name</th><th>Quantity</th></tr></thead><tbody>' +
+          req.body.emailBody +
+          '<tr><td></td><td style="text-align:right; font-weight: bold;"><p></p>' +
+          req.body.orderTotal +
+          '</td></tr></tbody></table></div>',
+      };
+    
 
     transporter.sendMail(mailOptions,(error, info)=>{
         if(error){
